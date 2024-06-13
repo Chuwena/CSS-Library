@@ -1,0 +1,41 @@
+// create a mixing that include all things that are default for all
+@mixin btn($bg-color: #e2e2e2) {
+  // #e2e2e2 is a default bg color
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  border: 0;
+  padding: $base-padding $base-padding * 2;
+  border-radius: $base-border-radius;
+  background-color: $bg-color;
+}
+
+.btn {
+  @include btn;
+}
+
+@each $key, $val in $color {
+  .btn-#{$key} {
+    @include btn($val);
+    // background-color: $val;
+    &:hover {
+      background-color: lighten($val, 5);
+    }
+  }
+  .btn-outlined-#{$key} {
+    @include btn(white);
+    // background-color: white;
+    border: $base-border-thickness solid $val;
+    &:hover {
+      background-color: $val;
+    }
+  }
+  .btn-complement-#{$key} {
+    @include btn($val);
+    color: light-comp($val);
+    &:hover {
+      color: $val;
+      background-color: light-comp($val);
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@each $key, $val in $color {
+  // $key, $val can be named anything else
+  .text-#{$key} {
+    color: $val;
+  }
+  // .text-hover-#{$key}:hover {
+  //   color: $val;
+  // }
+  .text-hover-#{$key} {
+    &:hover {
+      color: $val;
+    }
+    // &:last-child {
+    // }
+    // &:nth-child(2) {
+    // }
+  }
+
+  .bg-#{$key} {
+    background-color: $val;
+  }
+
+  @if ($val != black and $val != white) {
+    // light variation
+    @for $i from 1 through 9 {
+      .text-#{$key}-light-#{$i} {
+        color: mix(white, $val, $i * 10%);
+      }
+      .text-hover-#{$key}-light-#{$i} {
+        &:hover {
+          color: mix(white, $val, $i * 10%);
+        }
+      }
+      .bg-#{$key}-light-#{$i} {
+        background-color: mix(white, $val, $i * 10%);
+      }
+    }
+
+    // dark variation
+    @for $i from 1 through 9 {
+      .text-#{$key}-dark-#{$i} {
+        color: mix(black, $val, $i * 10%);
+      }
+      .text-hover-#{$key}-dark-#{$i} {
+        &:hover {
+          color: mix(black, $val, $i * 10%);
+        }
+      }
+      .bg-#{$key}-dark-#{$i} {
+        background-color: mix(black, $val, $i * 1%);
+      }
+    }
+  }
+}
+
+// @if (10>5) {
+//   .test-if {
+//     color: black;
+//   }
+// } @else {
+//   .text-if-2 {
+//     color: white;
+//   }
+// }
